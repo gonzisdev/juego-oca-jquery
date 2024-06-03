@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Añadimos JQuery, JS y nuestra hoja de estilos CSS -->
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Título de la página, autor y descripción -->
+    <title>La Oca Loca: El juego</title>
+    <meta name="description" content="PAC de Desarrollo de Diseño de Interfaces Web 2s2023/24">
+    <meta name="author" content="Gonzalo Vasco López">
+</head>
+<body>
+    <header>
+        <h1>La Oca Loca: El juego</h1> 
+        <!-- Emojis clickeables para controlar la música de fondo -->
+        <div id="musica">
+            🎧
+            <div id="play">
+                ▶️
+            </div>
+            <div id="stop">
+                ⏹️
+            </div>
+        </div>
+        <!-- Controles del juego, por defecto estarán ocultos (a excepción de Empezar Juego).
+             Se mostrarán según sea necesario -->
+        <div id="controles">
+            <div id="jugadores">
+                <h2>¿Cuántos sois? </h2>
+                <select>
+                    <option disabled selected>-- Selecciona --</option>
+                    <option value="2">2 Jugadores</option>
+                    <option value="3">3 Jugadores</option>
+                    <option value="4">4 Jugadores</option>
+                </select>
+            </div>
+
+            <div id="botones">
+                <button id="iniciar">Empezar Juego</button>
+                <button id="lanzar">Lanzar Dado</button>
+                <button id="reset">Reiniciar Juego</button>
+            </div>
+
+        </div>
+    </header>
+    <!-- Sección con un div para hacer un efecto skew (inclinado) en el diseño de la página -->
+    <section>
+        <div id="inclinado"></div>
+    </section>
+    <!-- Div contenedor del juego entero -->
+    <div id="juego">
+        <!-- Div contenedor del tablero, fichas y resultado final -->
+        <div id="container-tablero"> 
+            <!-- Div donde inyectaremos HTML con una tabla con el resultado final y un mensaje de enhorabuena -->
+            <div id="resultado"></div>
+            <!-- Imagen del tablero con un mapa asociado con las coordenadas de las casillas -->
+            <img id="tablero" src="imgs/JUEGO-DE-LA-OCA-EDITABLE1.png" usemap="#image-map" alt="Tablero">
+            <map name="image-map">
+                <area id="1" title="1" coords="82,629,225,714" shape="rect"></area>
+                <area id="2" title="2" coords="244,634,326,714" shape="rect"></area>
+                <area id="3" title="3" coords="347,636,426,718" shape="rect"></area>
+                <area id="4" title="4" coords="448,634,521,714" shape="rect"></area>
+                <area id="5" title="5" coords="545,634,625,716" shape="rect"></area>
+                <area id="6" title="6" coords="643,631,727,715" shape="rect"></area>
+                <area id="7" title="7" coords="744,634,827,714" shape="rect"></area>
+                <area id="8" title="8" coords="846,629,923,712" shape="rect"></area>
+                <area id="9" title="9" coords="944,633,1023,714" shape="rect"></area>
+                <area id="10" title="10" coords="945,532,1024,614" shape="rect"></area>
+                <area id="11" title="11" coords="943,432,1023,515" shape="rect"></area>
+                <area id="12" title="12" coords="944,331,1025,415" shape="rect"></area>
+                <area id="13" title="13" coords="943,231,1027,317" shape="rect"></area>
+                <area id="14" title="14" coords="942,140,1023,215" shape="rect"></area>
+                <area id="15" title="15" coords="943,37,1024,117" shape="rect"></area>
+                <area id="16" title="16" coords="845,36,922,113" shape="rect"></area>
+                <area id="17" title="17" coords="745,36,823,117" shape="rect"></area>
+                <area id="18" title="18" coords="646,34,725,114" shape="rect"></area>
+                <area id="19" title="19" coords="543,34,626,115" shape="rect"></area>
+                <area id="20" title="20" coords="446,37,525,114" shape="rect"></area>
+                <area id="21" title="21" coords="347,33,422,114" shape="rect"></area>
+                <area id="22" title="22" coords="243,37,322,115" shape="rect"></area>
+                <area id="23" title="23" coords="143,34,225,114" shape="rect"></area>
+                <area id="24" title="24" coords="145,137,223,215" shape="rect"></area>
+                <area id="25" title="25" coords="143,233,225,317" shape="rect"></area>
+                <area id="26" title="26" coords="145,331,224,417" shape="rect"></area>
+                <area id="27" title="27" coords="143,431,223,515" shape="rect"></area>
+                <area id="28" title="28" coords="138,531,222,614" shape="rect"></area>
+                <area id="29" title="29" coords="248,536,324,615" shape="rect"></area>
+                <area id="30" title="30" coords="344,533,425,615" shape="rect"></area>
+                <area id="31" title="31" coords="445,534,524,616" shape="rect"></area>
+                <area id="32" title="32" coords="546,534,626,615" shape="rect"></area>
+                <area id="33" title="33" coords="644,534,727,617" shape="rect"></area>
+                <area id="34" title="34" coords="745,533,825,618" shape="rect"></area>
+                <area id="35" title="35" coords="846,535,920,616" shape="rect"></area>
+                <area id="36" title="36" coords="847,432,924,515" shape="rect"></area>
+                <area id="37" title="37" coords="843,334,921,413" shape="rect"></area>
+                <area id="38" title="38" coords="848,233,923,316" shape="rect"></area>
+                <area id="39" title="39" coords="846,136,923,215" shape="rect"></area>
+                <area id="40" title="40" coords="748,138,824,217" shape="rect"></area>
+                <area id="41" title="41" coords="643,139,725,216" shape="rect"></area>
+                <area id="42" title="42" coords="545,138,625,214" shape="rect"></area>
+                <area id="43" title="43" coords="446,136,524,215" shape="rect"></area>
+                <area id="44" title="44" coords="349,138,423,215" shape="rect"></area>
+                <area id="45" title="45" coords="249,137,319,213" shape="rect"></area>
+                <area id="46" title="46" coords="252,238,322,315" shape="rect"></area>
+                <area id="47" title="47" coords="247,338,322,415" shape="rect"></area>
+                <area id="48" title="48" coords="243,442,322,518" shape="rect"></area>
+                <area id="49" title="49" coords="348,436,423,513" shape="rect"></area>
+                <area id="50" title="50" coords="446,436,524,516" shape="rect"></area>
+                <area id="51" title="51" coords="547,432,624,515" shape="rect"></area>
+                <area id="52" title="52" coords="646,435,723,514" shape="rect"></area>
+                <area id="53" title="53" coords="748,435,824,516" shape="rect"></area>
+                <area id="54" title="54" coords="743,333,823,415" shape="rect"></area>
+                <area id="55" title="55" coords="745,240,827,318" shape="rect"></area>
+                <area id="56" title="56" coords="645,237,725,314" shape="rect"></area>
+                <area id="57" title="57" coords="549,240,624,313" shape="rect"></area>
+                <area id="58" title="58" coords="448,237,523,314" shape="rect"></area>
+                <area id="59" title="59" coords="345,236,427,313" shape="rect"></area>
+                <area id="60" title="60" coords="346,331,725,415" shape="rect"></area>
+            </map>
+            <!-- Fichas de los jugadores, se colocarán en diferentes posiciones según sea necesario
+                 tanto en la elección del personaje, inicio de partida y transcurso de la partida.
+                 Inician ocultas por defecto -->
+            <div id="fichas">
+                <!-- Una vez escogidos los personajes ocultaremos este párrafo -->
+                <p id="escoge">Escoge los personajes:</p>
+
+                <div class="ficha-container">
+                    <span class="ficha-numero"></span>
+                    <img src="imgs/blanco.jpg" class="ficha" alt="Ficha Blanca">
+                </div>
+
+                <div class="ficha-container">
+                    <span class="ficha-numero"></span>
+                    <img src="imgs/rojo.jpg" class="ficha" alt="Ficha Roja">
+                </div>
+
+                <div class="ficha-container">
+                    <span class="ficha-numero"></span>
+                    <img src="imgs/verde.jpg" class="ficha" alt="Ficha Verde">
+                </div>
+
+                <div class="ficha-container">
+                    <span class="ficha-numero"></span>
+                    <img src="imgs/azul.jpg" class="ficha" alt="Ficha azul">
+                </div>
+            </div>
+            
+        </div>                                            
+    </div>
+    <!-- Div con información sobre los turnos y el resultado de la tirada del dado.
+         Inician ocultos y se mostrarán al empezar la partida -->
+    <div id="info">
+        <p id="turno">Turno del jugador: </p>
+        <p id="tirada">Resultado de la tirada: </p>
+    </div>
+    <!-- Etiqueta contenedora del audio. Estará oculta y se proporcionan controles en el Header para Iniciar y parar
+         la reproducción del audio. Se añade el atributo loop para que, si se inicia el audio, se reproduzca en bucle -->
+    <audio loop>
+        <source src="music/Dogs and Cats.mp3" type="audio/mp3">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+</body>
+</html>
+
+
